@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: helloworld
+    image: image-registry.openshift-image-registry.svc:5000/jpicarazzi/hello-openshift
+    env:
+      # learn about the downward api https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/#the-downward-api
+    - name: HELLO
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    ports:
+    - name: web
+      containerPort: 8090
+      protocol: TCP
+      
