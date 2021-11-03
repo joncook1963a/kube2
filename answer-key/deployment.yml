@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: image-registry.openshift-image-registry.svc:5000/jpicarazzi/hello-openshift
+        ports:
+        - name: web
+          containerPort: 8090
+          protocol: TCP
+
